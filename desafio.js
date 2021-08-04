@@ -12,7 +12,12 @@ let olympicsMedalTable = [
 ];
 
 Array.prototype.customFind = function (predicate) {
-    // Implemente aqui seu algoritmo
+    for(const x in this) {
+        if(predicate(this[x])) {
+            return this[x].country
+        }
+    }
+
     return null;
 }
 
@@ -22,18 +27,43 @@ Array.prototype.customSome = function (predicate) {
 }
 
 Array.prototype.customFilter = function (predicate) {
-    // Implemente aqui seu algoritmo
-    return [];
+    const list = []
+
+    for(const x in this) {
+        const item = this[x]
+        const result = predicate(item)
+
+        if(result) {
+            list.push(item)
+        }
+    }
+
+    return list;
 }
 
 Array.prototype.customMap = function (callback) {
-    // Implemente aqui seu algoritmo
-    return [];
+    const list = []
+
+    for(const x in this) {
+        const item = this[x]
+        const result = callback(item)
+        
+        if(result) {
+            list.push(result)
+        }
+    }
+    
+    return list;
 }
 
 Array.prototype.customReduce = function (callback, initialValue) {
-    // Implemente aqui seu algoritmo
-    return null;
+    let finalValue = initialValue !== undefined ? initialValue : 0
+    
+    for(const x in this) {
+        finalValue = callback(finalValue, this[x])
+    }
+    
+    return parseInt(finalValue)
 }
 
 // Código modelo utilizando filter, map e reduce
@@ -53,15 +83,21 @@ const resultByCustomFilterMapReduce = olympicsMedalTable.customFilter(i => i.con
 
 console.log(`Resultado custom - Medalhas de Ouro no continente Asiático: ${resultByCustomFilterMapReduce}`);
 
+
+
+
+
+
+
 /* DESAFIOS - CONCLUA AS FUNÇÕES customSome, customFind E UTILIZANDO TODAS AS FUNÇÕES 'CUSTOM' CONCLUA OS DESAFIOS ABAIXO: */
 
 // 1 - Crie um algoritmo que encontre o único pais do continente Africano
-// const paisAfricano =  <seu código aqui>;
-// console.log(paisAfricano);
+const paisAfricano = olympicsMedalTable.customFind(i => i.continent === 'AFRICA')
+console.log('País africano:', paisAfricano);
 
 // 2 - Crie um algoritmo que retorne o total de medalhas por país
-// const medalhasPorPais =  <seu código aqui>;
-// console.log(medalhasPorPais);
+const medalhasPorPais = olympicsMedalTable.customFilter(i => i.country === "BRASIL")
+console.log(medalhasPorPais);
 
 // 3 - Crie um algoritmo para encontrar os países que conquistaram mais que 10 medalhas de ouro
 // const paisesCom10MedalhasOuroNoMinimo =  <seu código aqui>;
