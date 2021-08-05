@@ -97,11 +97,13 @@ console.log('País africano:', paisAfricano);
 
 // 2 - Crie um algoritmo que retorne o total de medalhas por país
 const medalhasPorPais = olympicsMedalTable.customFilter(i => i.country === "BRASIL")
-console.log(medalhasPorPais);
+    .customMap(i => i)
+//console.log(medalhasPorPais);
 
 // 3 - Crie um algoritmo para encontrar os países que conquistaram mais que 10 medalhas de ouro
-// const paisesCom10MedalhasOuroNoMinimo =  <seu código aqui>;
-// console.log(paisesCom10MedalhasOuroNoMinimo);
+const paisesCom10MedalhasOuroNoMinimo = olympicsMedalTable.customFilter(i => i.gold > 10)
+    .customMap(i => i.country)
+console.log('Países com 10+ medalhas de ouro:', paisesCom10MedalhasOuroNoMinimo);
 
 // 4 - Crie um algoritmo para encontrar os países que conquistaram no minímo 30 medalhas (Ouro, Prata e Bronze)
 // const paisesCom30MedalhasNoMinimo =  <seu código aqui>;
